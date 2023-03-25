@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 
 const Quotes = () => {
   const [data, setData] = useState([]);
-  // const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    // setLoading(true);
+    setLoading(true);
 
     fetch('https://api.api-ninjas.com/v1/quotes?category=funny',
       {
@@ -21,9 +21,10 @@ const Quotes = () => {
         setData(data);
       })
       .catch((error) => setError(error.message));
+    setLoading(false);
   }, [setData]);
 
-  //   if (loading) return <h2>Loading... please wait</h2>;
+  if (loading) return <h2>Loading... please wait</h2>;
   if (error) {
     return (
       <h3>
