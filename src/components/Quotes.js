@@ -1,26 +1,35 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Quotes = () => {
-    const [quote, setQuotes] = useState([])
+  const [data, setData] = useState([]);
+  //   const [loading, setLoading] = useState(false);
+  //   const [error, setError] = useState(false);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            const res = await fetch("https://api.api-ninjas.com/v1/quotes?category=funny")
-            const json = await res.json()
-            setQuotes(json)
-        }
-        fetchData()
-    }, [setQuotes])
+  useEffect(() => {
+    fetch('https://api.api-ninjas.com/v1/quotes?category=funny',
+      {
+        headers: {
+          'X-Api-Key': 'hTAKXNFRMzvu2GX5y3pZ0Jo8X9WRprAcTGQV9DPv',
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((res) => res.json())
+      .then((data) => {
+        // console.log(data);
+        setData(data);
+      });
+  }, [setData]);
+
   return (
     <div>
-      {quote.map((item) => (
-        <article>
-            <h3>{item.quote}</h3>
-            <p>{item.author}</p>
-        </article>
+      {data.map((item) => (
+        <ul key={item.author}>
+          <li>{item.quote}</li>
+          <li>{item.author}</li>
+        </ul>
       ))}
     </div>
   );
-}
+};
 
 export default Quotes;
