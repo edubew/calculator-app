@@ -22,7 +22,7 @@ const Quotes = () => {
       })
       .catch((error) => setError(error.message));
     setLoading(false);
-  }, [setData]);
+  }, [setData, setLoading]);
 
   if (loading) return <h2>Loading... please wait</h2>;
   if (error) {
@@ -38,7 +38,7 @@ const Quotes = () => {
   return (
     <div>
       {data.map((item) => (
-        <ul key={item.author} className="quotes__container">
+        <ul key={data.indexOf(item)} className="quotes__container">
           <li>{item.quote}</li>
           <li className="author">{item.author}</li>
         </ul>
