@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import Quotes from 'Quotes';
+import Quotes from './Quotes';
+import maths from '../assets/maths.jpg';
 import calculate from '../logic/calculate';
 
 const Calculator = () => {
@@ -18,7 +19,7 @@ const Calculator = () => {
       : 0
   }`;
   return (
-    <>
+    <div className="calculator__wrapper">
       <div className="calculator__container">
         <div className="calculator__output">
           <span>{result}</span>
@@ -101,8 +102,11 @@ const Calculator = () => {
           =
         </button>
       </div>
-      <Quotes />
-    </>
+      <div>
+        <img src={maths} alt="math icon" className="calculator__image" />
+        <Quotes />
+      </div>
+    </div>
   );
 };
 
